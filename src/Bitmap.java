@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.util.Date;
 import java.util.Scanner;
 
 public class Bitmap {
@@ -13,7 +12,7 @@ public class Bitmap {
     public Bitmap(int width, int height) {
         this.width = width;
         this.height = height;
-        this.data = new int[this.width][this.height];
+        this.data = new int[this.height][this.width];
     }
 
     public int getWidth() {
@@ -24,58 +23,67 @@ public class Bitmap {
         return this.height;
     }
 
-    public void setPixel(int x, int y, boolean c) {
-        this.data[x][y] = c ? 1 : 0;
+    public void setPixel(int height, int width, boolean c) {
+        this.data[height][width] = c ? 1 : 0;
     }
 
     public void save(String filename) {
         try {
+
+            // print the file header
             PrintStream output = new PrintStream(filename);
             output.println("P1");
             output.println(this.width + " " + this.height);
 
-            for (int i = 0; i < this.height; i++) {
+            // go through rows and columns and write pixels line by line
+            for (int row = 0; row < this.height; row++) {
                 String line = "";
-                for (int j = 0; j < this.width; j++) {
-                    line += this.data[i][j];
+                for (int column = 0; column < this.width; column++) {
+                    line += this.data[row][column];
                 }
                 output.println(line);
             }
             output.close();
-
         } catch (Exception e) {
             e.getStackTrace();
         }
     }
 
-    public static int load(String filename) throws FileNotFoundException {
+    public static void load(String filename) throws FileNotFoundException {
+
+        // create file and scanner instances
         File file = new File(filename);
         Scanner scanner = new Scanner(file);
 
-        String line = scanner.nextLine();
-        String head = "P1";
-        if (!line.equals(head)) {
+        // check for bitmap header
+        String headlineOfFile = scanner.nextLine();
+        String headOfBitmap = "P1";
+        if (!headlineOfFile.equals(headOfBitmap)) {
             System.out.println("This ist not a Bitmap!");
-            return 1;
         }
 
-        int wdith = Integer.parseInt(scanner.next());
+        // read height and width, create Bitmap
+        int width = Integer.parseInt(scanner.next());
         int height = Integer.parseInt(scanner.next());
-        Bitmap bitmap = new Bitmap(wdith, height);
+        scanner.nextLine(); // go to next line and leave the linefeed
+        Bitmap bitmap = new Bitmap(width, height);
 
-        for (int i = 0; i < bitmap.height; i++) {
-            for (int j = 0; j < bitmap.width; j++) {
-                int next = Integer.parseInt(scanner.next());
-                boolean c = next == 0 ? false : true;
-                bitmap.setPixel(i, j, c);
+        // read line by line and character by character from file
+        int pixel = 0;
+        int row = 0;
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            for (int column = 0; column < line.length(); column++) {
+                // read character, make a string from it, parse to int
+                pixel = Integer.parseInt(String.valueOf(line.charAt(column)));
+                boolean c = pixel != 0;
+                bitmap.setPixel(row, column, c);
             }
+            row++;
         }
 
-
-        Date date = new Date();
-        String filename1 = "bitmap_" + date.getTime() + ".bmp";
-
-        bitmap.save(filename1);
-        return 1;
+        // save read file
+        String filenameNew = "loaded_and_exported_" + filename;
+        bitmap.save(filenameNew);
     }
 }

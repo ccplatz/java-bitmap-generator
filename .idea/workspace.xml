@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0ea44c27-3c6b-4cd6-a7fd-9120fa3e510d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/LICENSE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitmap_1660919986984.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitmap_1660920143041.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitmap_1661328795034.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitmap_1661330930679.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitmap_1661932785831.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitmap_1661933126979.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Bitmap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bitmap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

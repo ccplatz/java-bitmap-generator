@@ -27,3 +27,9 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### custom ###
+*.bmp
+*.iws
+workspace.xml
+tasks.xml
